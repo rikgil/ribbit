@@ -20,4 +20,5 @@ android {
 
 dependencies {
     compile 'com.android.support:support-v13:+'
+    compile files('src/main/lib/Parse-1.4.1.jar')
 }
