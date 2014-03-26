@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -22,16 +23,19 @@ import com.parse.ParseUser;
 
 public class LoginActivity extends Activity {
     protected TextView mSignUpTextView;
+    protected TextView mLoginTextView;
 
     protected EditText mUsername;
     protected EditText mPassword;
-    protected Button mLoginButton;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
+        //requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         setContentView(R.layout.activity_login);
+
+
 
         mSignUpTextView = (TextView) findViewById(R.id.signupText);
         mSignUpTextView.setOnClickListener(new View.OnClickListener() {
@@ -42,13 +46,12 @@ public class LoginActivity extends Activity {
             }
         });
 
-        mUsername = (EditText) findViewById(R.id.usernameField);
-        mPassword = (EditText) findViewById(R.id.passwordField);
-        mLoginButton = (Button) findViewById(R.id.loginButton);
 
-        mLoginButton.setOnClickListener(new View.OnClickListener() {
+        mLoginTextView = (TextView) findViewById(R.id.loginText);
+        mLoginTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 String username = mUsername.getText().toString().trim();
                 String password = mPassword.getText().toString().trim();
 
@@ -62,11 +65,11 @@ public class LoginActivity extends Activity {
                     AlertDialog dialog = alert.create();
                     dialog.show();
                 } else {
-                    setProgressBarIndeterminateVisibility(true);
+                    //          setProgressBarIndeterminateVisibility(true);
                     ParseUser.logInInBackground(username, password, new LogInCallback() {
                         @Override
                         public void done(ParseUser user, ParseException e) {
-                            setProgressBarIndeterminateVisibility(false);
+                            //                setProgressBarIndeterminateVisibility(false);
                             if (e == null) {
                                 //Sucesso
                                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
@@ -86,10 +89,15 @@ public class LoginActivity extends Activity {
                         }
                     });
                 }
-                }
-
-
+            }
         });
+
+        mUsername = (EditText) findViewById(R.id.usernameField);
+        mPassword = (EditText) findViewById(R.id.passwordField);
+
+
+
+
 
         if (savedInstanceState == null) {
             getFragmentManager().beginTransaction()
@@ -97,6 +105,7 @@ public class LoginActivity extends Activity {
                     .commit();
         }
     }
+
 
 
     @Override
@@ -112,10 +121,7 @@ public class LoginActivity extends Activity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
+
         return super.onOptionsItemSelected(item);
     }
 

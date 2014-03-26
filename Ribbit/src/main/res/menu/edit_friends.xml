@@ -1,5 +1,5 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.ricgil.ribbit.SignUpActivity" >
+    tools:context="com.ricgil.ribbit.EditFriendsActivity" >
 
 </menu>

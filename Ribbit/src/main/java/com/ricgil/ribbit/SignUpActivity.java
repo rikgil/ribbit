@@ -13,10 +13,13 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
+
+import org.w3c.dom.Text;
 
 public class SignUpActivity extends Activity {
 
@@ -24,7 +27,7 @@ public class SignUpActivity extends Activity {
     protected EditText mUsername;
     protected EditText mPassword;
     protected EditText mEmail;
-    protected Button mSignUpButton;
+    protected TextView mSignUpButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,17 +35,19 @@ public class SignUpActivity extends Activity {
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         setContentView(R.layout.activity_sign_up);
 
-        mUsername = (EditText) findViewById(R.id.usernameField);
+        mUsername = (EditText) findViewById(R.id.signupUsernameField);
         mPassword = (EditText) findViewById(R.id.passwordField);
         mEmail = (EditText) findViewById(R.id.emailField);
-        mSignUpButton = (Button) findViewById(R.id.signUpButton);
+        mSignUpButton = (TextView) findViewById(R.id.signUpButton);
 
         mSignUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String username = mUsername.getText().toString().trim();
+
                 String password = mPassword.getText().toString().trim();
+                String username = password;
                 String email = mEmail.getText().toString().trim()    ;
+
 
                 if(username.isEmpty() || password.isEmpty() || email.isEmpty()){
                     AlertDialog.Builder alert = new AlertDialog.Builder(SignUpActivity.this);
@@ -109,10 +114,7 @@ public class SignUpActivity extends Activity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
+
         return super.onOptionsItemSelected(item);
     }
 
