@@ -1,9 +1,13 @@
 package com.ricgil.ribbit;
 
 import android.app.ActionBar;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.FragmentTransaction;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -18,6 +22,11 @@ import com.parse.ParseUser;
 
 public class MainActivity extends FragmentActivity implements ActionBar.TabListener {
 
+    public static String TAG = MainActivity.class.getSimpleName();
+    public static final int TAKE_PHOTO_REQUEST = 0;
+    public static final int TAKE_VIDEO_REQUEST = 1;
+    public static final int PICK_PHOTO_REQUEST = 2;
+    public static final int PICK_VIDEO_REQUEST = 3;
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
      * fragments for each of the sections. We use a
@@ -28,12 +37,30 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
      */
     SectionsPagerAdapter mSectionsPagerAdapter;
 
+    protected DialogInterface.OnClickListener mDialogListener = new Dialog.OnClickListener(){
+        @Override
+        public void onClick(DialogInterface dialogInterface, int which) {
+            switch(which){
+                case 0://take picture
+                    Intent takePhotoIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    startActivityForResult(takePhotoIntent, TAKE_PHOTO_REQUEST);
+                    break;
+                case 1://take video
+                    break;
+                case 2://select picture
+                    break;
+                case 4://select video
+                    break;
+            }
+        }
+    };
+
     /**
      * The {@link ViewPager} that will host the section contents.
      */
     ViewPager mViewPager;
 
-    public static String TAG = MainActivity.class.getSimpleName();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,13 +138,26 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-        if (id == R.id.action_logout) {
-            ParseUser.logOut();
-            navigateToLogin();
-        }else if(id == R.id.action_edit_friends){
-            Intent intent = new Intent(this, EditFriendsActivity.class);
-            startActivity(intent);
+
+        switch (id){
+            case(R.id.action_logout):
+                ParseUser.logOut();
+                navigateToLogin();
+                break;
+            case (R.id.action_edit_friends):
+                Intent intent = new Intent(this, EditFriendsActivity.class);
+                startActivity(intent);
+                break;
+            case(R.id.action_camera):
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setItems(R.array.camera_choices, mDialogListener);
+                AlertDialog dialog = builder.create();
+                dialog.show();
+                break;
+
         }
+
+
         return super.onOptionsItemSelected(item);
     }
 
