@@ -25,9 +25,7 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="app: com.ricgil.ribbit" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="12b79e67-bd27-4839-8dc5-6c09db9164c4" name="Default" comment="Taking a Video Using an Intent">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Ribbit/src/main/java/com/ricgil/ribbit/MainActivity.java" afterPath="$PROJECT_DIR$/Ribbit/src/main/java/com/ricgil/ribbit/MainActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Ribbit/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/Ribbit/src/main/res/values/strings.xml" />
+    <list default="true" id="12b79e67-bd27-4839-8dc5-6c09db9164c4" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Ribbit.iws" />
@@ -1190,7 +1188,11 @@
       <created>1395874937470</created>
       <updated>1395874937470</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Taking a Video Using an Intent">
+      <created>1396303373800</created>
+      <updated>1396303373800</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
